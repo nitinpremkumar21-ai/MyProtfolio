@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Personal Portfolio</title>
+    <!-- Google Fonts for modern typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==========================================
+           1. BRANDING & GLOBAL STYLES
+           ========================================== */
+        :root {
+            /* Customize your brand colors here! */
+            --primary: #4f46e5;       /* Deep Indigo */
+            --secondary: #0ea5e9;     /* Sky Blue */
+            --text-main: #1e293b;     /* Slate Dark */
+            --text-muted: #64748b;    /* Slate Gray */
+            --bg-light: #f8fafc;      /* Cool light background */
+            --bg-white: #ffffff;      /* Pure white for cards */
+            --border: #e2e8f0;        /* Light borders */
+            --radius: 12px;           /* Rounded corners */
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth; /* Enables smooth-scroll navigation */
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--text-main);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        section {
+            padding: 80px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Subtle line under section titles */
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* ==========================================
+           2. NAVIGATION BAR
+           ========================================== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px); /* Blur effect behind transparent header */
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* ==========================================
+           3. HERO / PROFILE SECTION
+           ========================================== */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 100vh;
+            padding-top: 120px; /* Space for the fixed header */
+        }
+
+        /* Standard Avatar/Photo Placeholder */
+        .avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 25px rgba(79, 70, 229, 0.2);
+            border: 4px solid var(--bg-white);
+        }
+
+        /* If you want to use a real photo later, swap the .avatar CSS with this or use an <img> tag */
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: 0 4px 14px rgba(79, 70, 229, 0.4);
+            transition: var(--transition);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(79, 70, 229, 0.6);
+        }
+
+        /* ==========================================
+           4. ABOUT ME SECTION
+           ========================================== */
+        .about-text {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+
+        /* ==========================================
+           5. SKILLS SECTION
+           ========================================== */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .skill-badge {
+            background-color: var(--bg-white);
+            border: 1px solid var(--border);
+            padding: 15px;
+            border-radius: var(--radius);
+            text-align: center;
+            font-weight: 600;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .skill-badge:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ==========================================
+           6. PROJECTS SECTION
+           ========================================== */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background-color: var(--bg-white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+        }
+
+        .project-info p {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .project-link:hover {
+            color: var(--secondary);
+        }
+
+        /* ==========================================
+           7. CONTACT SECTION
+           ========================================== */
+        .contact {
+            text-align: center;
+        }
+
+        .contact p {
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .contact-btn {
+            background-color: var(--bg-white);
+            border: 1px solid var(--border);
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+
+        .contact-btn:hover {
+            background-color: var(--bg-light);
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* ==========================================
+           8. FOOTER
+           ========================================== */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid var(--border);
+            background-color: var(--bg-white);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* ==========================================
+           9. RESPONSIVE DESIGN (MOBILE ADAPTATION)
+           ========================================== */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 12px;
+            }
+            .nav-links a {
+                font-size: 0.85rem;
+            }
+            .hero h1 {
+                font-size: 2.25rem;
+            }
+            section {
+                padding: 60px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header>
+        <div class="nav-container">
+            <a href="#hero" class="logo">MyPortfolio</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero / Profile Section -->
+    <section id="hero" class="hero">
+        <!-- Generates a nice visual initial placeholder -->
+        <div class="avatar">
+            JD
+            <!-- Swap to your image like this when ready: -->
+            <!-- <img src="your-photo.jpg" alt="Jane Doe"> -->
+        </div>
+        <h1>Hi, I'm <span>Jane Doe</span></h1>
+        <p>Front-End Developer & Designer</p>
+        <a href="#contact" class="cta-button">Get In Touch</a>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about">
+        <h2 class="section-title">About Me</h2>
+        <p class="about-text">
+            I am an aspiring web developer passionate about crafting clean, modern, and user-friendly digital experiences. Over the past year, I have focused on mastering responsive web design to turn visual concepts into functional code. When I am not building web layouts, you can find me exploring design trends, hiking, or drinking excessive amounts of coffee.
+        </p>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2 class="section-title">My Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-badge">HTML5</div>
+            <div class="skill-badge">CSS3</div>
+            <div class="skill-badge">JavaScript</div>
+            <div class="skill-badge">Responsive Design</div>
+            <div class="skill-badge">Git & GitHub</div>
+            <div class="skill-badge">UI/UX Basics</div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="projects-grid">
+            
+            <!-- Project Card 1 -->
+            <div class="project-card">
+                <div class="project-info">
+                    <h3>🍳 Recipe Organizer</h3>
+                    <p>A responsive web app that allows home cooks to search, filter, and save their favorite recipes. Built focusing heavily on semantic HTML and complex CSS layouts.</p>
+                </div>
+                <a href="https://github.com/yourusername/recipe-organizer" target="_blank" class="project-link">
+                    View on GitHub →
+                </a>
+            </div>
+
+            <!-- Project Card 2 -->
+            <div class="project-card">
+                <div class="project-info">
+                    <h3>🕒 Productivity Dashboard</h3>
+                    <p>A minimalist personal dashboard featuring a Pomodoro timer, dynamic daily quote generator, and custom task manager to keep your workflow focused.</p>
+                </div>
+                <a href="https://github.com/yourusername/productivity-dashboard" target="_blank" class="project-link">
+                    View on GitHub →
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2 class="section-title">Let's Connect</h2>
+        <p>I am currently looking for new opportunities and collaborations. Drop me a line!</p>
+        <div class="contact-links">
+            <a href="mailto:your.email@example.com" class="contact-btn">
+                ✉️ Email Me
+            </a>
+            <a href="https://linkedin.com/in/yourusername" target="_blank" class="contact-btn">
+                💼 LinkedIn
+            </a>
+            <a href="https://github.com/yourusername" target="_blank" class="contact-btn">
+                💻 GitHub
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 Jane Doe. Built from scratch with HTML & CSS.</p>
+    </footer>
+
+</body>
+</html>
